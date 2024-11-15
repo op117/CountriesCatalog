@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Directory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-root">
+        <div class="header-container">
+            <h1>Countries Catalog</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a country...">
+                <select id="regionFilter">
+                    <option value="">All Regions</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Oceania">Oceania</option>
+                </select>
+            </div>
+        </div>
+        <div id="countryList"></div>
+        <div id="countryInfo" style="display: none;"></div>
+    </div>
+    <script src="src/app.js" type="module"></script>
+</body>
+</html>
