@@ -1,12 +1,5 @@
-export function displayCountries(countries) {
-    const countryList = document.getElementById('countryList');
-    const countryInfo = document.getElementById('countryInfo');
-
-    countryInfo.style.display = 'none';
-    countryInfo.innerHTML = '';
-
+export function displayCountries(countries, countryList) {
     countryList.innerHTML = '';
-    countryList.style.display = 'flex';
 
     countries.forEach(country => {
         const countryElement = document.createElement('div');
@@ -16,14 +9,17 @@ export function displayCountries(countries) {
             <img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="100">
             <p>Population: ${country.population.toLocaleString()}</p>
         `;
-        countryElement.addEventListener('click', () => displayCountryInfo(country));
+        
+        countryElement.addEventListener('click', () => {
+            displayCountryInfo(country, countryList);
+        });
         countryList.appendChild(countryElement);
     });
 }
 
-export function displayCountryInfo(country) {
-    const countryList = document.getElementById('countryList');
+export function displayCountryInfo(country, countryList) {
     const countryInfo = document.getElementById('countryInfo');
+    if (!countryInfo) return;
 
     countryList.style.display = 'none';
 
@@ -31,11 +27,11 @@ export function displayCountryInfo(country) {
     countryInfo.innerHTML = `
         <h2>${country.name.common}</h2>
         <img src="${country.flags.png}" alt="Flag of ${country.name.common}" width="150">
-        <p><strong>Capital:</strong> ${country.capital}</p>
-        <p><strong>Region:</strong> ${country.region}</p>
+        <p><strong>Capital:</strong> ${country.capital || 'N/A'}</p>
+        <p><strong>Region:</strong> ${country.region || 'N/A'}</p>
         <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
         <p><strong>Area:</strong> ${country.area.toLocaleString()} km²</p>
-        <p><strong>Currency:</strong> ${Object.values(country.currencies || {}).map(c => c.name).join(', ')}</p>
-        <p><strong>Languages:</strong> ${Object.values(country.languages || {}).join(', ')}</p>
+        <p><strong>Currency:</strong> ${Object.values(country.currencies || {}).map(c => c.name).join(', ') || 'N/A'}</p>
+        <p><strong>Languages:</strong> ${Object.values(country.languages || {}).join(', ') || 'N/A'}</p>
     `;
 }
